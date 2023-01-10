@@ -1,0 +1,6 @@
+.idea
+db.sqlite3
+main.py
+pruebas.py
+__pycache__
+pruebas.py
