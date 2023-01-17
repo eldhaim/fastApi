@@ -1,7 +1,5 @@
 from typing import List
-
 from fastapi import APIRouter, status
-
 from userApi import paths, messages, user_commons
 from userApi.models import User
 from userApi.users_controller import UsersController
@@ -42,8 +40,8 @@ async def get_user_by_id(username: str):
 
     - **id**: Identificador del usuario (obligatiorio)
     \f
-    :param username: User.username input.
-    :return user: User output.
+    :param username: FakeUser.username input.
+    :return user: FakeUser output.
     """
     return controller.get_user_by_id(username=username)
 
@@ -66,8 +64,8 @@ async def set_user(user: User):
     - **last_name**: Apellido del usuario (obligatior)
     - **email**: Correco electronico del usuario (Opcional)
     \f
-    :param user: User input.
-    :return user: User output.
+    :param user: FakeUser input.
+    :return user: FakeUser output.
     """
     return controller.set_user(user=user)
 
@@ -91,11 +89,11 @@ async def put_user(username: str, name: str = None, last_name: str = None, email
     - **last_name**: Apellido del usuario (Opcional)
     - **email**: Correco electronico del usuario (Opcional)
     \f
-    :param username: User.username input.
-    :param name: User.name input.
-    :param last_name: User.last_name input.
-    :param email: User.email input.
-    :return user: User output.
+    :param username: FakeUser.username input.
+    :param name: FakeUser.name input.
+    :param last_name: FakeUser.last_name input.
+    :param email: FakeUser.email input.
+    :return user: FakeUser output.
     """
     return controller.put_user(
         username=username,

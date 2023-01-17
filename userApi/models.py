@@ -1,5 +1,4 @@
 from typing import Union
-
 from pydantic import BaseModel
 
 
@@ -30,3 +29,16 @@ class User(BaseModel):
         self.name = name if name is not None else self.name
         self.last_name = last_name if last_name is not None else self.last_name
         self.email = email if email is not None else self.email
+
+
+class UserDb(User):
+    """
+    Usuario con contraseña para uso de la DB:
+
+    - **username**: Identificador del usuario (obligatiorio)
+    - **name**: Nombre del usuario (obligatior)
+    - **last_name**: Apellido del usuario (obligatior)
+    - **email**: Correco electronico del usuario (Opcional)
+    - **password**: Contraseña del usuario (obligatiorio)
+    """
+    password: str
