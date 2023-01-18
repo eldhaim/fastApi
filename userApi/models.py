@@ -10,25 +10,13 @@ class User(BaseModel):
     - **name**: Nombre del usuario (obligatior)
     - **last_name**: Apellido del usuario (obligatior)
     - **email**: Correco electronico del usuario (Opcional)
+    - **active**: Indica si el usuario esta activo (Opcional)
     """
     username: str
     name: str
     last_name: str
     email: Union[str, None] = None
-
-    def update_user(
-            self,
-            name: str = None,
-            last_name: str = None,
-            email: str = None
-    ):
-        """Cambia los datos del usuario
-    :param name: Nombre del usuario input (Opcional).
-    :param last_name: Apellido del usuario input (Opcional).
-    :param email: Email del usuario input (Opcional)."""
-        self.name = name if name is not None else self.name
-        self.last_name = last_name if last_name is not None else self.last_name
-        self.email = email if email is not None else self.email
+    active: bool = True
 
 
 class UserDb(User):
@@ -42,3 +30,23 @@ class UserDb(User):
     - **password**: Contraseña del usuario (obligatiorio)
     """
     password: str
+
+    def update_user(
+            self,
+            name: str = None,
+            last_name: str = None,
+            email: str = None,
+            active: bool = None,
+            password: str = None
+    ):
+        """Cambia los datos del usuario
+        :param password: Contrasena del usuario (Opcional).
+        :param active: Indicador de actividad del usuario (Opcional).
+        :param name: Nombre del usuario input (Opcional).
+        :param last_name: Apellido del usuario input (Opcional).
+        :param email: Email del usuario input (Opcional)."""
+        self.name = name if name is not None else self.name
+        self.last_name = last_name if last_name is not None else self.last_name
+        self.email = email if email is not None else self.email
+        self.active = active if active is not None else self.active
+        self.password = password if password is not None else self.password

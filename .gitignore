@@ -2,5 +2,5 @@
 db.sqlite3
 main.py
 pruebas.py
+local_env.py
 __pycache__
-pruebas.py

@@ -1,1 +1,1 @@
-APP_PREFIX = "/worldOfWarcraft"
+APP_PREFIX = "/API"

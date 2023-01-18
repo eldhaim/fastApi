@@ -1,0 +1,9 @@
+DEBUG = True
+USER = 'USER'
+PASSWORD = 'PASSWORD'
+DB_NAME = 'DB_NAME'
+MONGO_CLIENT_1 = 'mongodb+srv://'
+MONGO_CLIENT_T = ':'
+MONGO_CLIENT_A = '@'
+MONGO_CLIENT_2 = '.6hlxv7b.mongodb.net/?retryWrites=true&w=majority'
+SET = '$set'

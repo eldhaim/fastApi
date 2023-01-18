@@ -1,4 +1,5 @@
 # PRUEBAS SIN DB
+from userApi import serializers_variables as svar
 from userApi.models import User
 
 
@@ -31,3 +32,12 @@ class Commons:
             return False
         self.user = user[0]
         return True
+
+    def generate_user_from_db(self, user_db: dict) -> User:
+        user = User(
+            username=user_db[svar.ID],
+            name=user_db[svar.NAME],
+            last_name=user_db[svar.LAST_NAME],
+            email=user_db[svar.EMAIL]
+        )
+        return user
