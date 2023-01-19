@@ -1,15 +1,13 @@
 import commons
 from fastapi import HTTPException, status
 from typing import List
-from MongoDB.mongoDB import Database
 from MongoDB.users_db_methods import UserDBMethods
-from userApi import user_commons, messages, users_variables as uvar
+from userApi import messages
 from userApi.models import User, UserDb
 
 
 class UsersController:
-    """Objeto encargado de tratar las validaciones
-    y comunicar los modelos con el objeto 'router'"""
+    """Objeto encargado de comunicar los metodos de base de datos con el 'router'"""
 
     def __init__(self):
         self.__users_db_methods = UserDBMethods()

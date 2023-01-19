@@ -1,4 +1,4 @@
-from typing import Union
+from typing import Union, List
 from pydantic import BaseModel
 
 
@@ -28,8 +28,12 @@ class UserDb(User):
     - **last_name**: Apellido del usuario (obligatior)
     - **email**: Correco electronico del usuario (Opcional)
     - **password**: Contraseña del usuario (obligatiorio)
+    - **scopes**: Apis a las que pertenece (Debe ser ingresado por DB)
+    - **permissions**: Contiene los permisos [READ, WRITE, UPDATE, DELETE] (Debe ser ingresado por DB)
     """
     password: str
+    scopes: List[str] = []
+    permissions: List[str] = []
 
     def update_user(
             self,

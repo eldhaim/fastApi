@@ -1,5 +1,8 @@
 from typing import List
-from fastapi import APIRouter, status
+from fastapi import APIRouter, status, Depends
+from userApi import users_variables as uvar
+
+from auth import Auth
 from userApi import paths, messages, user_commons
 from userApi.models import User, UserDb
 from userApi.users_controller import UsersController
@@ -21,8 +24,13 @@ controller = UsersController()
     response_model=List[User],
     responses=messages.BASIC_RESPONSES
 )
-async def get_users():
+async def get_users(current_user: UserDb = Depends(Auth.get_current_user)):
     """Consulta de todos los usuarios"""
+    await Auth.validate_permissions(
+        scope=uvar.SCOPE,
+        permission=uvar.READ,
+        user_db=current_user
+    )
     return controller.get_users()
 
 
@@ -34,7 +42,7 @@ async def get_users():
     response_model=User,
     responses=messages.BASIC_RESPONSES
 )
-async def get_user_by_id(username: str):
+async def get_user_by_id(username: str, current_user: UserDb = Depends(Auth.get_current_user)):
     """
     Consulta de un usuario por username:
 
@@ -43,6 +51,11 @@ async def get_user_by_id(username: str):
     :param username: FakeUser.username input.
     :return user: FakeUser output.
     """
+    await Auth.validate_permissions(
+        scope=uvar.SCOPE,
+        permission=uvar.READ,
+        user_db=current_user
+    )
     return controller.get_user_by_id(username=username)
 
 
@@ -55,7 +68,7 @@ async def get_user_by_id(username: str):
     response_model=User,
     responses=messages.BASIC_RESPONSES
 )
-async def set_user(db_user: UserDb):
+async def set_user(db_user: UserDb, current_user: UserDb = Depends(Auth.get_current_user)):
     """
     Creacion de un usuario con toda la informacion:
 
@@ -69,6 +82,11 @@ async def set_user(db_user: UserDb):
     :param db_user: User with password input.
     :return user: User without password output.
     """
+    await Auth.validate_permissions(
+        scope=uvar.SCOPE,
+        permission=uvar.WRITE,
+        user_db=current_user
+    )
     return controller.set_user(db_user=db_user)
 
 
@@ -86,7 +104,8 @@ async def put_user(
         last_name: str = None,
         email: str = None,
         active: bool = None,
-        password: str = None
+        password: str = None,
+        current_user: UserDb = Depends(Auth.get_current_user)
 ):
     """
     Actualizacion de uno o mas campos de un usuario existente:
@@ -108,6 +127,11 @@ async def put_user(
     :param password: new password of the user input.
     :return user: User without password output.
     """
+    await Auth.validate_permissions(
+        scope=uvar.SCOPE,
+        permission=uvar.UPDATE,
+        user_db=current_user
+    )
     return controller.put_user(
         username=username,
         name=name,

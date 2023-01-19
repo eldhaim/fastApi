@@ -62,7 +62,9 @@ class UserDBMethods:
             last_name=db_user[svar.LAST_NAME],
             email=db_user[svar.EMAIL],
             active=db_user[svar.ACTIVE],
-            password=db_user[svar.PASSWORD]
+            password=db_user[svar.PASSWORD],
+            scopes=db_user[svar.SCOPES],
+            permissions=db_user[svar.PERMISSIONS]
         )
 
     def generate_user_from_db(self, user_db: dict) -> User:
