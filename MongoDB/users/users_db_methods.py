@@ -3,12 +3,27 @@ from MongoDB.mongoDB import Database
 from userApi import users_variables as uvar, user_commons, serializers_variables as svar
 from userApi.models import User, UserDb
 from userApi.serializers import user_serializer
+from typing import List
 
 
 class UserDBMethods:
     def __init__(self):
         self.__users_table = Database.collection(uvar.COLL_USERS)
+        self.__scopes_table = Database.collection(uvar.COLL_SCOPES)
         self.__comunes = user_commons.Commons()
+
+    def get_scopes_by_id(self, _ids: List[int]) -> List[str]:
+        scopes_list: List[str] = []
+        for _id in _ids:
+            query = {svar.ID: _id}
+            try:
+                db_scopes = self.__scopes_table.find(query)
+                if db_scopes[0] is not None:
+                    user_scopes = [i for i in list(db_scopes[0][uvar.SCOPES]) if i not in scopes_list]
+                    scopes_list += user_scopes
+            except Exception as e:
+                print(f"SCOPE CON ID {_id} NO ENCONTRADO (ERROR): {e}")
+        return scopes_list
 
     def get_users(self) -> list:
         users_db = list(self.__users_table.find())
@@ -53,7 +68,7 @@ class UserDBMethods:
         self.__users_table.update_one(query, new_values)
         return self.generate_user_from_db(user_serializer(user_db))
 
-    def get_user_from_db(self, _id:str) -> UserDb:
+    def get_user_from_db(self, _id: str) -> UserDb:
         query = {svar.ID: _id}
         db_user = self.__users_table.find(query)[0]
         return UserDb(
