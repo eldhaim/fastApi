@@ -1,6 +1,6 @@
 from MongoDB import variables
 from MongoDB.mongoDB import Database
-from userApi import users_variables as uvar, user_commons, serializers_variables as svar
+from userApi import users_variables as uvar, serializers_variables as svar
 from userApi.models import User, UserDb
 from userApi.serializers import user_serializer
 from typing import List
@@ -10,7 +10,6 @@ class UserDBMethods:
     def __init__(self):
         self.__users_table = Database.collection(uvar.COLL_USERS)
         self.__scopes_table = Database.collection(uvar.COLL_SCOPES)
-        self.__comunes = user_commons.Commons()
 
     def get_scopes_by_id(self, _ids: List[int]) -> List[str]:
         scopes_list: List[str] = []
@@ -96,7 +95,8 @@ class UserDBMethods:
         try:
             if self.__users_table.find(query)[0] is not None:
                 return True
-        except Exception:
+        except Exception as e:
+            print(f"USUARIO {username} NO ENCONTRADO: {e}")
             return False
 
 

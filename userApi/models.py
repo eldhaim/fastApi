@@ -32,7 +32,7 @@ class UserDb(User):
     - **permissions**: Contiene los permisos [READ, WRITE, UPDATE, DELETE] (Debe ser ingresado por DB)
     """
     password: str
-    scopes: List[str] = []
+    scopes: List[int] = []
     permissions: List[str] = []
 
     def update_user(

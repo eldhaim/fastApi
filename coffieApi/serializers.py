@@ -1,13 +1,13 @@
 from userApi.models import UserDb
-from userApi import serializers_variables as svar
+from coffieApi import variables as var
 
-
-def user_serializer(user: UserDb):
-    return {
-        svar.ID: user.username,
-        svar.NAME: user.name,
-        svar.LAST_NAME: user.last_name,
-        svar.EMAIL: user.email,
-        svar.ACTIVE: user.active,
-        svar.PASSWORD: user.password
-    }
+#
+# def user_serializer(user: UserDb):
+#     return {
+#         var.ID: user.username,
+#         var.NAME: user.name,
+#         var.LAST_NAME: user.last_name,
+#         var.EMAIL: user.email,
+#         var.ACTIVE: user.active,
+#         var.PASSWORD: user.password
+#     }

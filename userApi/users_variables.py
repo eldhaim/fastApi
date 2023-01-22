@@ -1,4 +1,6 @@
 COLL_USERS = 'Users'
+COLL_SCOPES = 'Scopes'
+SCOPES = 'scopes'
 SCOPE = 'USERAPI'
 READ = 'READ'
 WRITE = 'WRITE'

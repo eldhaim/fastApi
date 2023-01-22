@@ -1,7 +1,7 @@
 import commons
 from fastapi import HTTPException, status
 from typing import List
-from MongoDB.users_db_methods import UserDBMethods
+from MongoDB.users.users_db_methods import UserDBMethods
 from userApi import messages
 from userApi.models import User, UserDb
 

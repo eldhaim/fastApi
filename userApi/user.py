@@ -3,7 +3,7 @@ from fastapi import APIRouter, status, Depends
 from userApi import users_variables as uvar
 
 from auth import Auth
-from userApi import paths, messages, user_commons
+from userApi import paths, messages
 from userApi.models import User, UserDb
 from userApi.users_controller import UsersController
 
@@ -12,7 +12,6 @@ router = APIRouter(
     tags=[messages.TAG_DATA]
 )
 """Router encargado del manejo de usuarios"""
-comunes = user_commons.Commons()
 controller = UsersController()
 
 

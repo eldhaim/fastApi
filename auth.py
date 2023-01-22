@@ -1,6 +1,6 @@
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
-from MongoDB.users_db_methods import UserDBMethods
+from MongoDB.users.users_db_methods import UserDBMethods
 from userApi.models import UserDb
 
 
@@ -15,7 +15,6 @@ class Auth:
 
     @classmethod
     async def get_current_user(cls, token: str = Depends(oauth2_scheme)) -> UserDb:
-        print("get_current_user")
         if not cls.__users_db_methods.validate_user_by_username(token):
             raise HTTPException(
                 status_code=status.HTTP_401_UNAUTHORIZED,
@@ -35,7 +34,7 @@ class Auth:
 
     @classmethod
     async def validate_permissions(cls, scope: str, permission: str, user_db: UserDb):
-        if scope not in user_db.scopes:
+        if scope not in cls.__users_db_methods.get_scopes_by_id(user_db.scopes):
             raise HTTPException(
                 status_code=status.HTTP_401_UNAUTHORIZED,
                 detail="Does not have permissions"

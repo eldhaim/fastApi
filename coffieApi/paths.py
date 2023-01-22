@@ -1,6 +1,4 @@
 # TREATMENT OF USERS
-USERS_PREFIX = "/users"
-GET_USERS = ""
-GET_USER_BY_ID = "/user/{username}"
-SET_USER = "/user"
-PUT_USER = "/user/{username}"
+CUSTOMERS_ORDERS_PREFIX = "/customer_orders"
+GET_ORDERS = "/"
+SET_ORDER = "/order"
