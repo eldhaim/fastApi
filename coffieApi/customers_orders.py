@@ -3,7 +3,7 @@ from fastapi import APIRouter, status, Depends
 from coffieApi import variables as var
 from auth import Auth
 from coffieApi import paths, messages
-from coffieApi.models import Order, CustomerOrders
+from coffieApi.models import CustomerOrders
 from coffieApi.controller import CustomerOrdersController
 from userApi.models import UserDb
 
@@ -43,4 +43,4 @@ async def set_order(customer_orders: CustomerOrders, current_user: UserDb = Depe
         permission=var.WRITE,
         user_db=current_user
     )
-    return 'OK'
+    return controller.set_customer_order(customer_orders)

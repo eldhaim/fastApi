@@ -1,3 +1,6 @@
+from fastapi import HTTPException
+
+
 def mensaje_con_parametros(
         mensaje: str,
         parametros: list
@@ -17,3 +20,13 @@ seran reemplazados en el mensaje"""
         mensaje = mensaje.replace(f'[{str(contador)}]', parametro)
         contador += 1
     return mensaje
+
+
+def validation_for_response(condition: bool,
+                            status_code: int,
+                            detail: dict):
+    if not condition:
+        raise HTTPException(
+            status_code=status_code,
+            detail=detail
+        )
