@@ -54,7 +54,7 @@ class CustomersOrdersMethods:
             detail=messages.SET_ORDER_HTTP_BAD_REQUEST_SIZE
         )
 
-    def validate_product(self, product_list: List[ProductInList]):
+    def validate_product(self, product_list: List[ProductInList]):#RECUPERAR PRODUCTO DE LA BASE Y TRATAR
         for product in product_list:
             self.validate_product_id(product.id)
             self.validate_product_type(product.type)
@@ -67,5 +67,5 @@ class CustomersOrdersMethods:
         self.__customers_orders_table.insert_one(serializers.customer_order(customer_orders))
         return customer_orders
 
-    def update_customer_orders(self, customer_orders: CustomerOrders) -> CustomerOrders:
+    def update_customer_orders(self, customer_orders: CustomerOrders) -> CustomerOrders:#POSIBLE PUT
         pass
